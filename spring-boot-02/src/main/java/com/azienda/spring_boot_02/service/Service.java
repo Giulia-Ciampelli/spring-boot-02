@@ -33,7 +33,7 @@ public class Service {
 	public void findAllM() throws Exception {
 		
 		try {
-			List<Macchina> macchine = macchinaRepo.read();
+			List<Macchina> macchine = macchinaRepo.readAll();
 			System.out.println("Lista macchine:");
 			macchine.forEach(System.out::println);
 			transaction.commit();
@@ -47,7 +47,7 @@ public class Service {
 	public void findAllP() throws Exception {
 		
 		try {
-			List<Persona> persone = personaRepo.read();
+			List<Persona> persone = personaRepo.readAll();
 			System.out.println("Lista persone:");
 			persone.forEach(System.out::println);
 			transaction.commit();
@@ -61,13 +61,41 @@ public class Service {
 	public void findAll() throws Exception {
 		
 		try {
-			List<Macchina> macchine = macchinaRepo.read();
-			List<Persona> persone = personaRepo.read();
+			List<Macchina> macchine = macchinaRepo.readAll();
+			List<Persona> persone = personaRepo.readAll();
 			System.out.println("Lista macchine:");
 			macchine.forEach(System.out::println);
 			System.out.println("Lista persone:");
 			persone.forEach(System.out::println);
 			transaction.commit();
+		}
+		catch (Exception e) {
+			transaction.rollback();
+			throw e;
+		}
+	}
+	
+	public Macchina findByIdM(int id) throws Exception {
+		
+		try {
+			Macchina macchina = macchinaRepo.read(id);
+			System.out.println("Macchina trovata: " + macchina);
+			transaction.commit();
+			return macchina;
+		}
+		catch (Exception e) {
+			transaction.rollback();
+			throw e;
+		}
+	}
+	
+	public Persona findByIdP(int id) throws Exception {
+		
+		try {
+			Persona persona = personaRepo.read(id);
+			System.out.println("Persona trovata: " + persona);
+			transaction.commit();
+			return persona;
 		}
 		catch (Exception e) {
 			transaction.rollback();
@@ -101,6 +129,29 @@ public class Service {
 	}
 	
 	// update
+	public void updateM(Macchina macchina) throws Exception {
+		
+		try {
+			macchinaRepo.update(macchina);
+			transaction.commit();
+		}
+		catch (Exception e) {
+			transaction.rollback();
+			throw e;
+		}
+	}
+	
+	public void updateP(Persona persona) throws Exception {
+		
+		try {
+			personaRepo.update(persona);
+			transaction.commit();
+		}
+		catch (Exception e) {
+			transaction.rollback();
+			throw e;
+		}
+	}
 	
 	// delete
 	public void deleteM(Macchina macchina) throws SQLException {

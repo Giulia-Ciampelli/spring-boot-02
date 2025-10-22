@@ -19,14 +19,34 @@ public class PersonaRepository implements PersonaRepositoryInterface<Persona> {
 	}
 
 	@Override
-	public List<Persona> read() throws SQLException {
+	public List<Persona> readAll() throws SQLException {
 		return persone;
+	}
+	
+	@Override
+	public Persona read(Integer id) throws SQLException {
+
+		for (Persona p : persone) {
+			
+			if (p.getId().equals(id)) {
+				return p;
+			}
+		}
+		return null;
 	}
 
 	@Override
 	public void update(Persona persona) throws SQLException {
-		// TODO Auto-generated method stub
 		
+		for (Persona p : persone) {
+			
+			if (p.getId().equals(persona.getId())) {
+				p.setNome(persona.getNome());
+				p.setCognome(persona.getCognome());
+				System.out.println("Persona aggiornata: " + persona);
+				return;
+			}
+		}		
 	}
 
 	@Override

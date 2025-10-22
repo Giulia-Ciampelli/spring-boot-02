@@ -19,14 +19,34 @@ public class MacchinaRepository implements MacchinaRepositoryInterface<Macchina>
 	}
 
 	@Override
-	public List<Macchina> read() throws SQLException {
+	public List<Macchina> readAll() throws SQLException {
 		return macchine;
+	}
+	
+	@Override
+	public Macchina read(Integer id) throws SQLException {
+
+		for (Macchina m : macchine) {
+			
+			if (m.getId().equals(id)) {
+				return m;
+			}
+		}
+		return null;
 	}
 
 	@Override
 	public void update(Macchina macchina) throws SQLException {
-		// TODO Auto-generated method stub
 		
+		for (Macchina m : macchine) {
+			
+			if (m.getId().equals(macchina.getId())) {
+				m.setModello(macchina.getModello());
+				m.setCilindrata(macchina.getCilindrata());
+				System.out.println("Macchina aggiornata: " + macchina);
+				return;
+			}
+		}
 	}
 
 	@Override
