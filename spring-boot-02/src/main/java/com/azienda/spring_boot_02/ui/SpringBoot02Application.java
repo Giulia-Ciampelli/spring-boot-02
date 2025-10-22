@@ -8,7 +8,7 @@ import com.azienda.spring_boot_02.model.Macchina;
 import com.azienda.spring_boot_02.model.Persona;
 import com.azienda.spring_boot_02.service.Service;
 
-@SpringBootApplication(scanBasePackages = {"com.azienda.spring_boot_02.model"})
+@SpringBootApplication(scanBasePackages = {"com.azienda.spring_boot_02"})
 public class SpringBoot02Application {
 
 	public static void main(String[] args) {
